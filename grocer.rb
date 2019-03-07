@@ -16,14 +16,20 @@ def consolidate_cart(cart)
 end
 
 def apply_coupons(cart, coupons)
-# code here
+    cart.each do |item, info|
+      if item == coupons[0][:item]
+        cart["#{item} W/COUPON"] = {:price => coupons[0][:price], :clearance => info[:clearance], :count => 1}
+        cart[item][:count] -= coupons[0][:count]
+      end
+      cart.delete(item) if cart[item][:count] == 0
+    end
 end
 
 def apply_clearance(cart)
-  cart.each do |hash, item|
-    if item[:clearance]
-      new_price = item[:price] * 0.80
-      item[:price] = new_price.round(2)
+  cart.each do |item, info|
+    if info[:clearance]
+      new_price = info[:price] * 0.80
+      info[:price] = new_price.round(2)
     end
   end
 end
