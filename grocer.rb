@@ -46,7 +46,7 @@ def checkout(cart, coupons)
   total_arr = clearance_cart.collect do|c|
     c[1][:price]
   end
-  total = total_arr.inject(0) {|sum, num| sum + num }
+  total = total_arr.inject(0) {|sum, num| sum + num}
   total *= 0.90 if total > 100.00
   total
 end
