@@ -40,10 +40,10 @@ def apply_clearance(cart)
 end
 
 def checkout(cart, coupons)
-  coupon_cart = apply_coupons(cart, coupons)
+  final_cart = consolidate_cart(cart)
+  coupon_cart = apply_coupons(final_cart, coupons)
   clearance_cart = apply_clearance(coupon_cart)
-  final_cart = consolidate_cart(clearance_cart)
-  total = final_cart.sum {|c| c[:price]}
+  total = clearance_cart.sum {|c| c[:price]}
   total *= 0.90 if total > 100.00
   total
 end
