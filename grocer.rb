@@ -39,9 +39,9 @@ def apply_clearance(cart)
 end
 
 def checkout(cart, coupons)
+  binding.pry
   coupon_cart = apply_coupons(cart, coupons)
   clearance_cart = apply_clearance(coupon_cart)
   final_cart = consolidate_cart(clearance_cart)
-  binding.pry
   final_cart.sum {|h| h[:amount] }
 end
