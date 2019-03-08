@@ -43,7 +43,8 @@ def checkout(cart, coupons)
   final_cart = consolidate_cart(cart)
   coupon_cart = apply_coupons(final_cart, coupons)
   clearance_cart = apply_clearance(coupon_cart)
-  total_arr = clearance_cart.collect do|c|
+  total_arr = clearance_cart.collect do|c, t|
+    binding.pry
     c[1][:price]
   end
   total = total_arr.inject(0) {|sum, num| sum + num}
