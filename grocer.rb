@@ -47,6 +47,7 @@ def checkout(cart, coupons)
     c[1][:price]
   end
   total = total_arr.inject(0) {|sum, num| sum + num}
+  binding.pry
   total *= 0.90 if total > 100.00
   total
 end
