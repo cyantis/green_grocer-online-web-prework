@@ -44,7 +44,7 @@ def checkout(cart, coupons)
   coupon_cart = apply_coupons(final_cart, coupons)
   clearance_cart = apply_clearance(coupon_cart)
   binding.pry
-  total = clearance_cart.sum {|c| c[:price]}
+  total = clearance_cart.sum {|name, info| c[:price]}
   total *= 0.90 if total > 100.00
   total
 end
