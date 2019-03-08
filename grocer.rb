@@ -42,4 +42,6 @@ def checkout(cart, coupons)
   coupon_cart = apply_coupons(cart, coupons)
   clearance_cart = apply_clearance(coupon_cart)
   final_cart = consolidate_cart(clearance_cart)
+  binding.pry
+  final_cart.sum {|h| h[:amount] }
 end
