@@ -45,7 +45,7 @@ def checkout(cart, coupons)
   clearance_cart = apply_clearance(coupon_cart)
   clearance_cart.collect do|c|
     binding.pry
-    c[:price]
+    c[1][:price]
   end
   total *= 0.90 if total > 100.00
   total
