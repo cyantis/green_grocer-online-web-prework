@@ -16,13 +16,17 @@ def consolidate_cart(cart)
 end
 
 def apply_coupons(cart, coupons)
-    cart.each do |item, info|
-      if item == coupons[0][:item]
-        cart["#{item} W/COUPON"] = {:price => coupons[0][:price], :clearance => info[:clearance], :count => 1}
-        cart[item][:count] -= coupons[0][:count]
+    coupons.each do |coupon|
+      name = coupon[:item]
+      if cart[name] && !cart["#{name} W/COUPON"]
+        cart["#{name} W/COUPON"] = {:price => coupon[:cost], :clearance => cart[name][:clearance], :count => 1}
+        cart[name][:count] -= coupon[:num]
+      elsif cart[name]
+        cart["#{name} W/COUPON"][:count] += 1
+        cart[name][:count] -= cart["#{name} W/COUPON"][:count]
       end
-      cart.delete(item) if cart[item][:count] == 0
     end
+    cart
 end
 
 def apply_clearance(cart)
