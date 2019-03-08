@@ -43,7 +43,8 @@ def checkout(cart, coupons)
   final_cart = consolidate_cart(cart)
   coupon_cart = apply_coupons(final_cart, coupons)
   clearance_cart = apply_clearance(coupon_cart)
-  total_arr = clearance_cart.collect do|c| c[:price]
+  clearance_cart.collect do|c| 
+    c[:price]
   end
   total *= 0.90 if total > 100.00
   total
